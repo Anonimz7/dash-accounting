@@ -1,7 +1,7 @@
 # DB Accounting — Modular
 
 Hasil pemecahan `db-accounting.html` menjadi struktur modular
-**tanpa mengubah UI/UX dan fitur** (CSS/JS hasil split identik dengan aslinya).
+**tanpa mengubah UI/UX dan fitur** (CSS/JS hasil split identik dengan aslinya)
 
 ## Struktur
 
