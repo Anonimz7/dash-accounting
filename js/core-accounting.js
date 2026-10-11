@@ -152,7 +152,7 @@ function totalModal(c){
   return modalPokok+profit;
 }
 function saldoKasBank(c){
-  return ['1-1000','1-1010','1-1020','1-1030'].map(code=>({code,name:c.coa.find(a=>a.code===code).name,balance:acctBalance(c,code)}));
+  return ['1-1000','1-1010','1-1020','1-1030'].map(code=>({code,name:(c.coa.find(a=>a.code===code)||{}).name||code,balance:acctBalance(c,code)}));
 }
 function totalPiutang(c){ return c.sales.filter(s=>s.status!=='Lunas').reduce((s,x)=>s+x.total,0); }
 function totalHutang(c){ return c.purchases.filter(s=>s.status!=='Lunas').reduce((s,x)=>s+x.total,0); }

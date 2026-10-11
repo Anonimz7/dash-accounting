@@ -39,8 +39,8 @@ function submitItem(){
 }
 function openStockModal(itemId,type){
   const c=co();
-  const kasOpts=['1-1000','1-1010','1-1020','1-1030'].map(code=>`<option value="${code}">${esc(c.coa.find(a=>a.code===code).name)}</option>`).join('');
-  openModal((type==='Masuk'?'Stok Masuk':'Stok Keluar')+' — '+esc(c.inventory.find(i=>i.id===itemId).name),`
+  const kasOpts=['1-1000','1-1010','1-1020','1-1030'].map(code=>`<option value="${code}">${esc((c.coa.find(a=>a.code===code)||{}).name||code)}</option>`).join('');
+  openModal((type==='Masuk'?'Stok Masuk':'Stok Keluar')+' — '+esc((c.inventory.find(i=>i.id===itemId)||{}).name||''),`
     <div class="field-row"><div class="field"><label>Tanggal</label><input type="date" id="sm_date" value="${todayStr()}"></div>
     <div class="field"><label>Qty</label><input type="number" id="sm_qty" placeholder="0"></div></div>
     ${type==='Masuk'?`<div class="field"><label>HPP per Unit (opsional)</label><input type="number" id="sm_cost" placeholder="Gunakan HPP rata-rata bila kosong"></div>`:''}

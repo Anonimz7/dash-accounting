@@ -29,7 +29,7 @@ function exportAsetTetap(){
 }
 function openAssetModal(){
   const c=co();
-  const kasOpts=['1-1000','1-1010','1-1020','1-1030'].map(code=>`<option value="${code}">${esc(c.coa.find(a=>a.code===code).name)}</option>`).join('');
+  const kasOpts=['1-1000','1-1010','1-1020','1-1030'].map(code=>`<option value="${code}">${esc((c.coa.find(a=>a.code===code)||{}).name||code)}</option>`).join('');
   openModal('Tambah Aset Tetap',`
     <div class="field"><label>Nama Aset</label><input type="text" id="as_name" placeholder="Contoh: Motor Operasional"></div>
     <div class="field-row"><div class="field"><label>Kategori</label><input type="text" id="as_cat" placeholder="Kendaraan / Peralatan / Mesin"></div>

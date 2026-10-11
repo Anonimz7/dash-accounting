@@ -23,7 +23,7 @@ function exportKasbank(){
 }
 function openCashbankModal(){
   const c=co();
-  const rekOpts=['1-1000','1-1010','1-1020','1-1030'].map(code=>`<option value="${code}">${esc(c.coa.find(a=>a.code===code).name)}</option>`).join('');
+  const rekOpts=['1-1000','1-1010','1-1020','1-1030'].map(code=>`<option value="${code}">${esc((c.coa.find(a=>a.code===code)||{}).name||code)}</option>`).join('');
   const counterOpts=c.coa.filter(a=>!['1-1000','1-1010','1-1020','1-1030'].includes(a.code)).map(a=>`<option value="${a.code}">${a.code} — ${esc(a.name)}</option>`).join('');
   openModal('Transaksi Kas & Bank Baru',`
     <div class="field-row"><div class="field"><label>Tanggal</label><input type="date" id="k_date" value="${todayStr()}"></div>

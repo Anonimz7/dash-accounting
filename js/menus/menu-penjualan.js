@@ -27,7 +27,7 @@ function exportPenjualan(){
 function openSaleModal(){
   const c=co();
   const custOpts=c.contacts.filter(x=>x.type==='Pelanggan').map(x=>`<option value="${x.id}">${esc(x.name)}</option>`).join('');
-  const kasOpts=['1-1000','1-1010','1-1020','1-1030'].map(code=>`<option value="${code}">${esc(c.coa.find(a=>a.code===code).name)}</option>`).join('');
+  const kasOpts=['1-1000','1-1010','1-1020','1-1030'].map(code=>`<option value="${code}">${esc((c.coa.find(a=>a.code===code)||{}).name||code)}</option>`).join('');
   openModal('Faktur Penjualan Baru',`
     <div class="field-row"><div class="field"><label>Tanggal</label><input type="date" id="f_date" value="${todayStr()}"></div>
     <div class="field"><label>Pelanggan</label><select id="f_cust"><option value="">Pelanggan Umum</option>${custOpts}</select></div></div>
@@ -52,7 +52,7 @@ function submitSale(){
 }
 function doReceivePayment(saleId){
   const c=co();
-  openModal('Terima Pembayaran Piutang',`<div class="field"><label>Rekening Penerima</label><select id="rp_kas">${['1-1000','1-1010','1-1020','1-1030'].map(code=>`<option value="${code}">${esc(c.coa.find(a=>a.code===code).name)}</option>`).join('')}</select></div>`);
+  openModal('Terima Pembayaran Piutang',`<div class="field"><label>Rekening Penerima</label><select id="rp_kas">${['1-1000','1-1010','1-1020','1-1030'].map(code=>`<option value="${code}">${esc((c.coa.find(a=>a.code===code)||{}).name||code)}</option>`).join('')}</select></div>`);
   modalFooter(`<button class="btn" onclick="closeModal()">Batal</button><button class="btn btn-primary" onclick="(function(){receiveSalePayment(co(),'${saleId}',document.getElementById('rp_kas').value);saveCompany(co().id);closeModal();toast('Pembayaran diterima');renderAll();})()">Konfirmasi</button>`);
 }
 

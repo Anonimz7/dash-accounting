@@ -27,7 +27,7 @@ function exportPembelian(){
 function openPurchaseModal(){
   const c=co();
   const supOpts=c.contacts.filter(x=>x.type==='Supplier').map(x=>`<option value="${x.id}">${esc(x.name)}</option>`).join('');
-  const kasOpts=['1-1000','1-1010','1-1020','1-1030'].map(code=>`<option value="${code}">${esc(c.coa.find(a=>a.code===code).name)}</option>`).join('');
+  const kasOpts=['1-1000','1-1010','1-1020','1-1030'].map(code=>`<option value="${code}">${esc((c.coa.find(a=>a.code===code)||{}).name||code)}</option>`).join('');
   openModal('Tagihan Pembelian Baru',`
     <div class="field-row"><div class="field"><label>Tanggal</label><input type="date" id="p_date" value="${todayStr()}"></div>
     <div class="field"><label>Supplier</label><select id="p_sup"><option value="">Umum</option>${supOpts}</select></div></div>
@@ -50,7 +50,7 @@ function submitPurchase(){
 }
 function doPaySupplier(purchaseId){
   const c=co();
-  openModal('Bayar Hutang Usaha',`<div class="field"><label>Rekening Sumber Dana</label><select id="pp_kas">${['1-1000','1-1010','1-1020','1-1030'].map(code=>`<option value="${code}">${esc(c.coa.find(a=>a.code===code).name)}</option>`).join('')}</select></div>`);
+  openModal('Bayar Hutang Usaha',`<div class="field"><label>Rekening Sumber Dana</label><select id="pp_kas">${['1-1000','1-1010','1-1020','1-1030'].map(code=>`<option value="${code}">${esc((c.coa.find(a=>a.code===code)||{}).name||code)}</option>`).join('')}</select></div>`);
   modalFooter(`<button class="btn" onclick="closeModal()">Batal</button><button class="btn btn-primary" onclick="(function(){paySupplier(co(),'${purchaseId}',document.getElementById('pp_kas').value);saveCompany(co().id);closeModal();toast('Hutang dibayar');renderAll();})()">Konfirmasi</button>`);
 }
 
