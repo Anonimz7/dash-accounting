@@ -17,7 +17,7 @@ const TierAccess = (() => {
     name: 'Owner',
     roleLabel: 'Super Admin',
     description: 'Pemilik — akses penuh seluruh menu dan pengaturan.',
-    menus: ['dashboard', 'transaksi', 'penjualan', 'pembelian', 'kasbank', 'jurnal', 'persediaan', 'asettetap', 'kontak', 'laporan', 'pajak', 'perusahaan', 'pengaturan', 'akun', 'sandi'],
+    menus: ['dashboard', 'transaksi', 'penjualan', 'pembelian', 'kasbank', 'jurnal', 'persediaan', 'asettetap', 'kontak', 'laporan', 'pajak', 'perusahaan', 'pengaturan', 'akun-center', 'akun', 'sandi'],
     permissions: { view: true, create: true, edit: true, del: true, expo: true, manageUsers: true, manageSettings: true },
   };
 
@@ -47,12 +47,18 @@ const TierAccess = (() => {
     return def;
   }
 
-  function allowedRoutes() { return def.menus.slice(); }
+  function allowedRoutes() {
+    const m = def.menus.slice();
+    if (m.indexOf('akun-center') === -1) m.push('akun-center');
+    return m;
+  }
 
   // NAV didefinisikan di core-shell.js; fungsi ini dipanggil saat render (runtime).
   function visibleNav() {
     if (typeof NAV === 'undefined') return [];
-    return NAV.filter((n) => def.menus.indexOf(n.r) !== -1);
+    const menus = def.menus.slice();
+    if (menus.indexOf('akun-center') === -1) menus.push('akun-center');
+    return NAV.filter((n) => menus.indexOf(n.r) !== -1);
   }
 
   function canAccess(route) { return def.menus.indexOf(route) !== -1; }
