@@ -12,6 +12,19 @@ function toast(msg){
   document.getElementById('toastRoot').appendChild(el);
   setTimeout(()=>el.remove(),2600);
 }
-function co(){return S.data[S.activeId];}
+function co(){
+  const c=S.data[S.activeId];
+  if(c){
+    if(!Array.isArray(c.coa))c.coa=[];
+    if(!Array.isArray(c.journal))c.journal=[];
+    if(!Array.isArray(c.fixedAssets))c.fixedAssets=[];
+    if(!Array.isArray(c.inventory))c.inventory=[];
+    if(!Array.isArray(c.contacts))c.contacts=[];
+    if(!Array.isArray(c.sales))c.sales=[];
+    if(!Array.isArray(c.purchases))c.purchases=[];
+    if(!Array.isArray(c.cashbank))c.cashbank=[];
+  }
+  return c;
+}
 function coMeta(id){return S.companies.find(c=>c.id===id);}
 
