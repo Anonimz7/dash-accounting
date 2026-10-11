@@ -31,3 +31,16 @@ th{color:var(--text-2);}
 
 /* Lencana perusahaan berwarna terang (mis. "1%") tetap terbaca di tema terang */
 .co-badge{box-shadow:inset 0 0 0 1px rgba(0,0,0,.08);}
+
+/* Fix: input password/autofill tampil sebagai kotak hitam */
+input:-webkit-autofill,
+input:-webkit-autofill:hover,
+input:-webkit-autofill:focus {
+  -webkit-text-fill-color: var(--text-1);
+  -webkit-box-shadow: 0 0 0 1000px var(--bg-2) inset;
+  transition: background-color 9999s ease-in-out 0s;
+}
+
+/* Fix: ikon sidebar menumpuk teks */
+.navitem span { min-width: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.navitem svg { flex-shrink: 0; }
